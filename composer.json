@@ -3,6 +3,6 @@
 	"type": "library",
 	"license": "BSD",
 	"autoload": {
-		"psr-4": {"Propcom\\SSO\\": "src/"}
+		"psr-4": {"Propcom\\PHPSecLib\\": "src/"}
 	}
 }
