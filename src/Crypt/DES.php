@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of DES.
@@ -140,7 +140,7 @@ define('CRYPT_DES_MODE_MCRYPT', CRYPT_MODE_MCRYPT);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_DES extends Crypt_Base
+class DES extends Base
 {
     /**
      * Block Length of the cipher
@@ -1348,7 +1348,7 @@ class Crypt_DES extends Crypt_Base
      */
     function _setupInlineCrypt()
     {
-        $lambda_functions =& Crypt_DES::_getLambdaFunctions();
+        $lambda_functions =& DES::_getLambdaFunctions();
 
         // Engine configuration for:
         // -  DES ($des_rounds == 1) or

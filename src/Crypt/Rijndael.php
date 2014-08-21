@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of Rijndael.
@@ -137,7 +137,7 @@ define('CRYPT_RIJNDAEL_MODE_MCRYPT', CRYPT_MODE_MCRYPT);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_Rijndael extends Crypt_Base
+class Rijndael extends Base
 {
     /**
      * The default password key_size used by setPassword()
@@ -1183,7 +1183,7 @@ class Crypt_Rijndael extends Crypt_Base
         // So here we are'nt under the same heavy timing-stress as we are in _de/encryptBlock() or de/encrypt().
         // However...the here generated function- $code, stored as php callback in $this->inline_crypt, must work as fast as even possible.
 
-        $lambda_functions =& Crypt_Rijndael::_getLambdaFunctions();
+        $lambda_functions =& Rijndael::_getLambdaFunctions();
 
         // The first 10 generated $lambda_functions will use the key-words hardcoded for better performance.
         // For memory reason we limit those ultra-optimized functions.

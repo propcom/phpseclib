@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of AES.
@@ -128,7 +128,7 @@ define('CRYPT_AES_MODE_MCRYPT', CRYPT_MODE_MCRYPT);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_AES extends Crypt_Rijndael
+class AES extends Rijndael
 {
     /**
      * The namespace used by the cipher for its constants.

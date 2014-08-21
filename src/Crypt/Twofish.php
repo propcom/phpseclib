@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of Twofish.
@@ -121,7 +121,7 @@ define('CRYPT_TWOFISH_MODE_MCRYPT', CRYPT_MODE_MCRYPT);
  * @author  Hans-Juergen Petrich <petrich@tronic-media.com>
  * @access  public
  */
-class Crypt_Twofish extends Crypt_Base
+class Twofish extends Base
 {
     /**
      * The namespace used by the cipher for its constants.
@@ -749,7 +749,7 @@ class Crypt_Twofish extends Crypt_Base
      */
     function _setupInlineCrypt()
     {
-        $lambda_functions =& Crypt_Twofish::_getLambdaFunctions();
+        $lambda_functions =& Twofish::_getLambdaFunctions();
 
         // Max. 10 Ultra-Hi-optimized inline-crypt functions. After that, we'll (still) create very fast code, but not the ultimate fast one.
         $gen_hi_opt_code = (bool)( count($lambda_functions) < 10 );

@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Base Class for all Crypt_* cipher classes
@@ -120,7 +120,7 @@ define('CRYPT_MODE_MCRYPT', 2);
  * @author  Hans-Juergen Petrich <petrich@tronic-media.com>
  * @access  public
  */
-class Crypt_Base
+class Base
 {
     /**
      * The Encryption Mode
@@ -583,7 +583,7 @@ class Crypt_Base
 
                 switch (true) {
                     case $method == 'pbkdf1':
-                        $hashObj = new Crypt_Hash();
+                        $hashObj = new Hash();
                         $hashObj->setHash($hash);
                         if ($dkLen > $hashObj->getLength()) {
                             user_error('Derived key too long');
@@ -605,7 +605,7 @@ class Crypt_Base
                     case !in_array($hash, hash_algos()):
                         $i = 1;
                         while (strlen($key) < $dkLen) {
-                            $hmac = new Crypt_Hash();
+                            $hmac = new Hash();
                             $hmac->setHash($hash);
                             $hmac->setKey($password);
                             $f = $u = $hmac->hash($salt . pack('N', $i++));

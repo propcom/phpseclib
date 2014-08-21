@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of Triple DES.
@@ -75,7 +75,7 @@ define('CRYPT_DES_MODE_CBC3', CRYPT_DES_MODE_CBC);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_TripleDES extends Crypt_DES
+class TripleDES extends DES
 {
     /**
      * The default password key_size used by setPassword()
@@ -192,9 +192,9 @@ class Crypt_TripleDES extends Crypt_DES
 
                 // This three $des'es will do the 3CBC work (if $key > 64bits)
                 $this->des = array(
-                    new Crypt_DES(CRYPT_DES_MODE_CBC),
-                    new Crypt_DES(CRYPT_DES_MODE_CBC),
-                    new Crypt_DES(CRYPT_DES_MODE_CBC),
+                    new DES(CRYPT_DES_MODE_CBC),
+                    new DES(CRYPT_DES_MODE_CBC),
+                    new DES(CRYPT_DES_MODE_CBC),
                 );
 
                 // we're going to be doing the padding, ourselves, so disable it in the Crypt_DES objects

@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP PKCS#1 (v2.1) compliant implementation of RSA.
@@ -267,7 +267,7 @@ define('CRYPT_RSA_PUBLIC_FORMAT_PKCS8', 7);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_RSA
+class RSA
 {
     /**
      * Precomputed Zero
@@ -534,10 +534,10 @@ class Crypt_RSA
         $this->zero = new BigInteger();
         $this->one = new BigInteger(1);
 
-        $this->hash = new Crypt_Hash('sha1');
+        $this->hash = new Hash('sha1');
         $this->hLen = $this->hash->getLength();
         $this->hashName = 'sha1';
-        $this->mgfHash = new Crypt_Hash('sha1');
+        $this->mgfHash = new Hash('sha1');
         $this->mgfHLen = $this->mgfHash->getLength();
     }
 
@@ -802,7 +802,7 @@ class Crypt_RSA
                         $symkey.= pack('H*', sha1($temp));
                     }
                     $symkey = substr($symkey, 0, 32);
-                    $crypto = new Crypt_AES();
+                    $crypto = new AES();
 
                     $crypto->setKey($symkey);
                     $crypto->disablePadding();
@@ -813,7 +813,7 @@ class Crypt_RSA
                 $private = base64_encode($private);
                 $key.= 'Private-Lines: ' . ((strlen($private) + 63) >> 6) . "\r\n";
                 $key.= chunk_split($private, 64);
-                $hash = new Crypt_Hash('sha1');
+                $hash = new Hash('sha1');
                 $hash->setKey(pack('H*', sha1($hashkey)));
                 $key.= 'Private-MAC: ' . bin2hex($hash->hash($source)) . "\r\n";
 
@@ -856,7 +856,7 @@ class Crypt_RSA
                         $salt = crypt_random_string(8);
                         $iterationCount = 2048;
 
-                        $crypto = new Crypt_DES();
+                        $crypto = new DES();
                         $crypto->setPassword($this->password, 'pbkdf1', 'md5', $salt, $iterationCount);
                         $RSAPrivateKey = $crypto->encrypt($RSAPrivateKey);
 
@@ -893,7 +893,7 @@ class Crypt_RSA
                     $iv = crypt_random_string(8);
                     $symkey = pack('H*', md5($this->password . $iv)); // symkey is short for symmetric key
                     $symkey.= substr(pack('H*', md5($symkey . $this->password . $iv)), 0, 8);
-                    $des = new Crypt_TripleDES();
+                    $des = new TripleDES();
                     $des->setKey($symkey);
                     $des->setIV($iv);
                     $iv = strtoupper(bin2hex($iv));
@@ -1062,21 +1062,21 @@ class Crypt_RSA
                     }
                     switch ($matches[1]) {
                         case 'AES-256-CBC':
-                            $crypto = new Crypt_AES();
+                            $crypto = new AES();
                             break;
                         case 'AES-128-CBC':
                             $symkey = substr($symkey, 0, 16);
-                            $crypto = new Crypt_AES();
+                            $crypto = new AES();
                             break;
                         case 'DES-EDE3-CFB':
-                            $crypto = new Crypt_TripleDES(CRYPT_DES_MODE_CFB);
+                            $crypto = new TripleDES(CRYPT_DES_MODE_CFB);
                             break;
                         case 'DES-EDE3-CBC':
                             $symkey = substr($symkey, 0, 24);
-                            $crypto = new Crypt_TripleDES();
+                            $crypto = new TripleDES();
                             break;
                         case 'DES-CBC':
-                            $crypto = new Crypt_DES();
+                            $crypto = new DES();
                             break;
                         default:
                             return false;
@@ -1152,7 +1152,7 @@ class Crypt_RSA
                                 return false;
                             }
 
-                            $crypto = new Crypt_DES();
+                            $crypto = new DES();
                             $crypto->setPassword($this->password, 'pbkdf1', 'md5', $salt, $iterationCount);
                             $key = $crypto->decrypt($key);
                             if ($key === false) {
@@ -1337,7 +1337,7 @@ class Crypt_RSA
                             $symkey.= pack('H*', sha1($temp));
                         }
                         $symkey = substr($symkey, 0, 32);
-                        $crypto = new Crypt_AES();
+                        $crypto = new AES();
                 }
 
                 if ($encryption != 'none') {
@@ -1493,10 +1493,10 @@ class Crypt_RSA
             $this->comment = $key->comment;
 
             if (is_object($key->hash)) {
-                $this->hash = new Crypt_Hash($key->hash->getHash());
+                $this->hash = new Hash($key->hash->getHash());
             }
             if (is_object($key->mgfHash)) {
-                $this->mgfHash = new Crypt_Hash($key->mgfHash->getHash());
+                $this->mgfHash = new Hash($key->mgfHash->getHash());
             }
 
             if (is_object($key->modulus)) {
@@ -1687,7 +1687,7 @@ class Crypt_RSA
             return true;
         }
 
-        $rsa = new Crypt_RSA();
+        $rsa = new RSA();
         if (!$rsa->loadKey($key, $type)) {
             return false;
         }
@@ -1792,7 +1792,7 @@ class Crypt_RSA
      */
     function __clone()
     {
-        $key = new Crypt_RSA();
+        $key = new RSA();
         $key->loadKey($this);
         return $key;
     }
@@ -1924,11 +1924,11 @@ class Crypt_RSA
             case 'sha256':
             case 'sha384':
             case 'sha512':
-                $this->hash = new Crypt_Hash($hash);
+                $this->hash = new Hash($hash);
                 $this->hashName = $hash;
                 break;
             default:
-                $this->hash = new Crypt_Hash('sha1');
+                $this->hash = new Hash('sha1');
                 $this->hashName = 'sha1';
         }
         $this->hLen = $this->hash->getLength();
@@ -1953,10 +1953,10 @@ class Crypt_RSA
             case 'sha256':
             case 'sha384':
             case 'sha512':
-                $this->mgfHash = new Crypt_Hash($hash);
+                $this->mgfHash = new Hash($hash);
                 break;
             default:
-                $this->mgfHash = new Crypt_Hash('sha1');
+                $this->mgfHash = new Hash('sha1');
         }
         $this->mgfHLen = $this->mgfHash->getLength();
     }

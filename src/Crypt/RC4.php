@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of RC4.
@@ -96,7 +96,7 @@ define('CRYPT_RC4_DECRYPT', 1);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_RC4 extends Crypt_Base
+class RC4 extends Base
 {
     /**
      * Block Length of the cipher

@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementations of keyed-hash message authentication codes (HMACs) and various cryptographic hashing functions.
@@ -83,7 +83,7 @@ define('CRYPT_HASH_MODE_HASH',     3);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @access  public
  */
-class Crypt_Hash
+class Hash
 {
     /**
      * Hash Parameter

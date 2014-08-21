@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of Blowfish.
@@ -121,7 +121,7 @@ define('CRYPT_BLOWFISH_MODE_MCRYPT', CRYPT_MODE_MCRYPT);
  * @author  Hans-Juergen Petrich <petrich@tronic-media.com>
  * @access  public
  */
-class Crypt_Blowfish extends Crypt_Base
+class Blowfish extends Base
 {
     /**
      * Block Length of the cipher
@@ -529,7 +529,7 @@ class Crypt_Blowfish extends Crypt_Base
      */
     function _setupInlineCrypt()
     {
-        $lambda_functions =& Crypt_Blowfish::_getLambdaFunctions();
+        $lambda_functions =& Blowfish::_getLambdaFunctions();
 
         // We create max. 10 hi-optimized code for memory reason. Means: For each $key one ultra fast inline-crypt function.
         // After that, we'll still create very fast optimized code but not the hi-ultimative code, for each $mode one.

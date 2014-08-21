@@ -1,6 +1,6 @@
 <?php
 
-namespace Propcom\PHPSecLib;
+namespace Propcom\PHPSecLib\Crypt;
 
 /**
  * Pure-PHP implementation of RC2.
@@ -117,7 +117,7 @@ define('CRYPT_RC2_MODE_MCRYPT', CRYPT_MODE_MCRYPT);
  * @package Crypt_RC2
  * @access  public
  */
-class Crypt_RC2 extends Crypt_Base
+class RC2 extends Base
 {
     /**
      * Block Length of the cipher
