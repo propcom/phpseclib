@@ -1,7 +1,6 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-namespace PHPSecLib;
+namespace Propcom\PHPSecLib;
 
 /**
  * Pure-PHP PKCS#1 (v2.1) compliant implementation of RSA.
