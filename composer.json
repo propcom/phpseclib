@@ -1,5 +1,5 @@
 {
-	"name": "propcom/sso",
+	"name": "propcom/phpseclib",
 	"type": "library",
 	"license": "BSD",
 	"autoload": {
