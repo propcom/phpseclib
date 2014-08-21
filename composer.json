@@ -1,0 +1,8 @@
+{
+	"name": "propcom/sso",
+	"type": "library",
+	"license": "BSD",
+	"autoload": {
+		"psr-4": {"Propcom\\SSO\\": "src/"}
+	}
+}
