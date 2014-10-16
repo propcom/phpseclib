@@ -65,15 +65,15 @@ use \PHPSecLib\Math\BigInteger;
 /**
  * Toggles the internal implementation
  */
-define('CRYPT_HASH_MODE_INTERNAL', 1);
+defined('CRYPT_HASH_MODE_INTERNAL') or define('CRYPT_HASH_MODE_INTERNAL', 1);
 /**
  * Toggles the mhash() implementation, which has been deprecated on PHP 5.3.0+.
  */
-define('CRYPT_HASH_MODE_MHASH',    2);
+defined('CRYPT_HASH_MODE_MHASH') or define('CRYPT_HASH_MODE_MHASH',    2);
 /**
  * Toggles the hash() implementation, which works on PHP 5.1.2+.
  */
-define('CRYPT_HASH_MODE_HASH',     3);
+defined('CRYPT_HASH_MODE_HASH') or define('CRYPT_HASH_MODE_HASH',     3);
 /**#@-*/
 
 /**
